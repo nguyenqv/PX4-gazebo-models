@@ -1,0 +1,3092 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <world name="allen_sg_thermal_video">
+    <scene>
+      <ambient>0.6 0.6 0.6 1</ambient>
+      <background>0.55 0.72 0.92 1</background>
+      <shadows>false</shadows>
+    </scene>
+    <physics type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+    <gravity>0 0 -9.80665</gravity>
+    <magnetic_field>0 4.1e-05 1.0e-05</magnetic_field>
+    <wind>
+      <linear_velocity>0 0 0</linear_velocity>
+    </wind>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact" />
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu" />
+    <plugin filename="gz-sim-air-pressure-system" name="gz::sim::systems::AirPressure" />
+    <plugin filename="gz-sim-air-speed-system" name="gz::sim::systems::AirSpeed" />
+    <plugin filename="gz-sim-apply-link-wrench-system" name="gz::sim::systems::ApplyLinkWrench" />
+    <plugin filename="gz-sim-navsat-system" name="gz::sim::systems::NavSat" />
+    <plugin filename="gz-sim-magnetometer-system" name="gz::sim::systems::Magnetometer">
+      <use_units_gauss>false</use_units_gauss>
+      <use_earth_frame_ned>false</use_earth_frame_ned>
+    </plugin>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 100 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>2000 2000</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>40000 40000</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.5 0.6 0.5 1</ambient>
+            <diffuse>0.5 0.6 0.5 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>1.3521</latitude_deg>
+      <longitude_deg>103.8198</longitude_deg>
+      <elevation>15</elevation>
+    </spherical_coordinates>
+    <plugin filename="liballen_sg_thermal_wind.so" name="allen_sg::ThermalWind">
+      <model_prefix>allen_glider</model_prefix>
+      <link_name>base_link</link_name>
+      <center_n>0</center_n>
+      <center_e>0</center_e>
+      <drift_n>0.2</drift_n>
+      <drift_e>0.8</drift_e>
+      <horizontal_wind>true</horizontal_wind>
+      <spanwise_lift>true</spanwise_lift>
+      <zi>1100</zi>
+      <wstar>2.1</wstar>
+      <marker_model>thermal_marker</marker_model>
+      <marker_height>400</marker_height>
+    </plugin>
+    <model name="ground_marks">
+      <static>true</static>
+      <link name="link">
+        <visual name="tile_-6_-6">
+          <pose>-900 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-6_-5">
+          <pose>-900 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-6_-4">
+          <pose>-900 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-6_-3">
+          <pose>-900 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-6_-2">
+          <pose>-900 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-6_-1">
+          <pose>-900 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-6_0">
+          <pose>-900 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-6_1">
+          <pose>-900 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-6_2">
+          <pose>-900 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-6_3">
+          <pose>-900 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-6_4">
+          <pose>-900 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-6_5">
+          <pose>-900 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-6_6">
+          <pose>-900 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-5_-6">
+          <pose>-750 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-5_-5">
+          <pose>-750 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-5_-4">
+          <pose>-750 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-5_-3">
+          <pose>-750 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-5_-2">
+          <pose>-750 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-5_-1">
+          <pose>-750 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-5_0">
+          <pose>-750 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-5_1">
+          <pose>-750 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-5_2">
+          <pose>-750 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-5_3">
+          <pose>-750 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-5_4">
+          <pose>-750 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-5_5">
+          <pose>-750 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-5_6">
+          <pose>-750 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-4_-6">
+          <pose>-600 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-4_-5">
+          <pose>-600 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-4_-4">
+          <pose>-600 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-4_-3">
+          <pose>-600 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-4_-2">
+          <pose>-600 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-4_-1">
+          <pose>-600 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-4_0">
+          <pose>-600 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-4_1">
+          <pose>-600 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-4_2">
+          <pose>-600 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-4_3">
+          <pose>-600 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-4_4">
+          <pose>-600 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-4_5">
+          <pose>-600 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-4_6">
+          <pose>-600 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-3_-6">
+          <pose>-450 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-3_-5">
+          <pose>-450 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-3_-4">
+          <pose>-450 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-3_-3">
+          <pose>-450 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-3_-2">
+          <pose>-450 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-3_-1">
+          <pose>-450 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-3_0">
+          <pose>-450 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-3_1">
+          <pose>-450 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-3_2">
+          <pose>-450 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-3_3">
+          <pose>-450 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-3_4">
+          <pose>-450 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-3_5">
+          <pose>-450 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-3_6">
+          <pose>-450 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-2_-6">
+          <pose>-300 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-2_-5">
+          <pose>-300 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-2_-4">
+          <pose>-300 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-2_-3">
+          <pose>-300 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-2_-2">
+          <pose>-300 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-2_-1">
+          <pose>-300 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-2_0">
+          <pose>-300 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-2_1">
+          <pose>-300 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-2_2">
+          <pose>-300 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-2_3">
+          <pose>-300 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-2_4">
+          <pose>-300 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-2_5">
+          <pose>-300 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-2_6">
+          <pose>-300 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-1_-6">
+          <pose>-150 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-1_-5">
+          <pose>-150 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-1_-4">
+          <pose>-150 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-1_-3">
+          <pose>-150 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-1_-2">
+          <pose>-150 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-1_-1">
+          <pose>-150 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-1_0">
+          <pose>-150 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-1_1">
+          <pose>-150 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-1_2">
+          <pose>-150 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-1_3">
+          <pose>-150 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-1_4">
+          <pose>-150 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-1_5">
+          <pose>-150 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_-1_6">
+          <pose>-150 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_0_-6">
+          <pose>0 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_0_-5">
+          <pose>0 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_0_-4">
+          <pose>0 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_0_-3">
+          <pose>0 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_0_-2">
+          <pose>0 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_0_-1">
+          <pose>0 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_0_0">
+          <pose>0 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_0_1">
+          <pose>0 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_0_2">
+          <pose>0 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_0_3">
+          <pose>0 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_0_4">
+          <pose>0 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_0_5">
+          <pose>0 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_0_6">
+          <pose>0 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_1_-6">
+          <pose>150 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_1_-5">
+          <pose>150 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_1_-4">
+          <pose>150 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_1_-3">
+          <pose>150 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_1_-2">
+          <pose>150 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_1_-1">
+          <pose>150 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_1_0">
+          <pose>150 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_1_1">
+          <pose>150 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_1_2">
+          <pose>150 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_1_3">
+          <pose>150 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_1_4">
+          <pose>150 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_1_5">
+          <pose>150 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_1_6">
+          <pose>150 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_2_-6">
+          <pose>300 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_2_-5">
+          <pose>300 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_2_-4">
+          <pose>300 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_2_-3">
+          <pose>300 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_2_-2">
+          <pose>300 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_2_-1">
+          <pose>300 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_2_0">
+          <pose>300 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_2_1">
+          <pose>300 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_2_2">
+          <pose>300 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_2_3">
+          <pose>300 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_2_4">
+          <pose>300 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_2_5">
+          <pose>300 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_2_6">
+          <pose>300 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_3_-6">
+          <pose>450 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_3_-5">
+          <pose>450 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_3_-4">
+          <pose>450 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_3_-3">
+          <pose>450 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_3_-2">
+          <pose>450 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_3_-1">
+          <pose>450 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_3_0">
+          <pose>450 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_3_1">
+          <pose>450 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_3_2">
+          <pose>450 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_3_3">
+          <pose>450 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_3_4">
+          <pose>450 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_3_5">
+          <pose>450 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_3_6">
+          <pose>450 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_4_-6">
+          <pose>600 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_4_-5">
+          <pose>600 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_4_-4">
+          <pose>600 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_4_-3">
+          <pose>600 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_4_-2">
+          <pose>600 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_4_-1">
+          <pose>600 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_4_0">
+          <pose>600 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_4_1">
+          <pose>600 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_4_2">
+          <pose>600 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_4_3">
+          <pose>600 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_4_4">
+          <pose>600 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_4_5">
+          <pose>600 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_4_6">
+          <pose>600 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_5_-6">
+          <pose>750 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_5_-5">
+          <pose>750 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_5_-4">
+          <pose>750 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_5_-3">
+          <pose>750 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_5_-2">
+          <pose>750 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_5_-1">
+          <pose>750 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_5_0">
+          <pose>750 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_5_1">
+          <pose>750 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_5_2">
+          <pose>750 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_5_3">
+          <pose>750 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_5_4">
+          <pose>750 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_5_5">
+          <pose>750 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_5_6">
+          <pose>750 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_6_-6">
+          <pose>900 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_6_-5">
+          <pose>900 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_6_-4">
+          <pose>900 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_6_-3">
+          <pose>900 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_6_-2">
+          <pose>900 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_6_-1">
+          <pose>900 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_6_0">
+          <pose>900 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_6_1">
+          <pose>900 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_6_2">
+          <pose>900 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_6_3">
+          <pose>900 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_6_4">
+          <pose>900 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_6_5">
+          <pose>900 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_6_6">
+          <pose>900 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_7_-6">
+          <pose>1050 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_7_-5">
+          <pose>1050 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_7_-4">
+          <pose>1050 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_7_-3">
+          <pose>1050 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_7_-2">
+          <pose>1050 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_7_-1">
+          <pose>1050 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_7_0">
+          <pose>1050 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_7_1">
+          <pose>1050 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_7_2">
+          <pose>1050 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_7_3">
+          <pose>1050 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_7_4">
+          <pose>1050 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_7_5">
+          <pose>1050 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_7_6">
+          <pose>1050 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_8_-6">
+          <pose>1200 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_8_-5">
+          <pose>1200 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_8_-4">
+          <pose>1200 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_8_-3">
+          <pose>1200 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_8_-2">
+          <pose>1200 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_8_-1">
+          <pose>1200 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_8_0">
+          <pose>1200 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_8_1">
+          <pose>1200 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_8_2">
+          <pose>1200 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_8_3">
+          <pose>1200 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_8_4">
+          <pose>1200 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_8_5">
+          <pose>1200 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_8_6">
+          <pose>1200 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_9_-6">
+          <pose>1350 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_9_-5">
+          <pose>1350 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_9_-4">
+          <pose>1350 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_9_-3">
+          <pose>1350 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_9_-2">
+          <pose>1350 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_9_-1">
+          <pose>1350 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_9_0">
+          <pose>1350 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_9_1">
+          <pose>1350 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_9_2">
+          <pose>1350 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_9_3">
+          <pose>1350 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_9_4">
+          <pose>1350 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_9_5">
+          <pose>1350 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_9_6">
+          <pose>1350 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_10_-6">
+          <pose>1500 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_10_-5">
+          <pose>1500 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_10_-4">
+          <pose>1500 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_10_-3">
+          <pose>1500 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_10_-2">
+          <pose>1500 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_10_-1">
+          <pose>1500 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_10_0">
+          <pose>1500 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_10_1">
+          <pose>1500 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_10_2">
+          <pose>1500 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_10_3">
+          <pose>1500 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_10_4">
+          <pose>1500 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_10_5">
+          <pose>1500 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_10_6">
+          <pose>1500 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_11_-6">
+          <pose>1650 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_11_-5">
+          <pose>1650 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_11_-4">
+          <pose>1650 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_11_-3">
+          <pose>1650 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_11_-2">
+          <pose>1650 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_11_-1">
+          <pose>1650 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_11_0">
+          <pose>1650 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_11_1">
+          <pose>1650 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_11_2">
+          <pose>1650 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_11_3">
+          <pose>1650 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_11_4">
+          <pose>1650 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_11_5">
+          <pose>1650 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_11_6">
+          <pose>1650 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_12_-6">
+          <pose>1800 -900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_12_-5">
+          <pose>1800 -750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_12_-4">
+          <pose>1800 -600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_12_-3">
+          <pose>1800 -450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_12_-2">
+          <pose>1800 -300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_12_-1">
+          <pose>1800 -150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_12_0">
+          <pose>1800 0 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_12_1">
+          <pose>1800 150 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_12_2">
+          <pose>1800 300 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_12_3">
+          <pose>1800 450 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_12_4">
+          <pose>1800 600 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_12_5">
+          <pose>1800 750 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.85 0.85 0.8 1</ambient>
+            <diffuse>0.85 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tile_12_6">
+          <pose>1800 900 0.03 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>40 40 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.45 0.35 1</ambient>
+            <diffuse>0.35 0.45 0.35 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="thermal_marker">
+      <pose>0 0 400 0 0 0</pose>
+      <link name="link">
+        <gravity>false</gravity>
+        <inertial>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <iyy>1</iyy>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <visual name="core">
+          <geometry>
+            <cylinder>
+              <radius>6</radius>
+              <length>800</length>
+            </cylinder>
+          </geometry>
+          <transparency>0.35</transparency>
+          <material>
+            <ambient>1 0.55 0.15 1</ambient>
+            <diffuse>1 0.55 0.15 1</diffuse>
+            <emissive>0.6 0.3 0.05 1</emissive>
+          </material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

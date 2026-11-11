@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <world name="allen_sg_thermal">
+    <!-- PX4 lockstep expects 250 Hz, as in PX4's own default world. -->
+    <physics type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+    <gravity>0 0 -9.80665</gravity>
+    <!-- Approximate field for Singapore in the ENU world frame, tesla. -->
+    <magnetic_field>0 4.1e-05 1.0e-05</magnetic_field>
+    <!-- The updraft is written here every step by ThermalWind below. -->
+    <wind><linear_velocity>0 0 0</linear_velocity></wind>
+    <!-- A world that lists its own systems does not get PX4's server.config set in
+         Gazebo Harmonic, so every system the aircraft's sensors need is listed here
+         (same set as PX4's Tools/simulation/gz/server.config, without its camera plugins). -->
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact"/>
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+    <plugin filename="gz-sim-air-pressure-system" name="gz::sim::systems::AirPressure"/>
+    <plugin filename="gz-sim-air-speed-system" name="gz::sim::systems::AirSpeed"/>
+    <plugin filename="gz-sim-apply-link-wrench-system" name="gz::sim::systems::ApplyLinkWrench"/>
+    <plugin filename="gz-sim-navsat-system" name="gz::sim::systems::NavSat"/>
+    <plugin filename="gz-sim-magnetometer-system" name="gz::sim::systems::Magnetometer">
+      <!-- As in PX4's server.config: tesla, in the sensor frame. Without these PX4 warns that the heading is wrong. -->
+      <use_units_gauss>false</use_units_gauss>
+      <use_earth_frame_ned>false</use_earth_frame_ned>
+    </plugin>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows><pose>0 0 100 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse><specular>0.2 0.2 0.2 1</specular>
+      <attenuation><range>1000</range><constant>0.9</constant><linear>0.01</linear><quadratic>0.001</quadratic></attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <model name="ground_plane">
+      <static>true</static><link name="link">
+        <collision name="collision"><geometry><plane><normal>0 0 1</normal><size>2000 2000</size></plane></geometry></collision>
+        <visual name="visual"><geometry><plane><normal>0 0 1</normal><size>2000 2000</size></plane></geometry>
+          <material><ambient>0.5 0.6 0.5 1</ambient><diffuse>0.5 0.6 0.5 1</diffuse></material></visual>
+      </link>
+    </model>
+    <!-- GPS origin of the world: the Singapore reference point used by the ROS nodes. Not a flight zone. -->
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>1.3521</latitude_deg>
+      <longitude_deg>103.8198</longitude_deg>
+      <elevation>15</elevation>
+    </spherical_coordinates>
+    <!-- Waits for PX4 to spawn the aircraft. World coordinates: X=East, Y=North, Z=Up.
+         For the stock Cessna set model_prefix to rc_cessna. -->
+    <plugin filename="liballen_sg_thermal_wind.so" name="allen_sg::ThermalWind">
+      <model_prefix>allen_glider</model_prefix><link_name>base_link</link_name>
+      <center_n>0</center_n><center_e>0</center_e>
+      <drift_n>0.2</drift_n><drift_e>0.8</drift_e>
+      <!-- true: the aircraft is blown along at the thermal's drift, as in real air. -->
+      <horizontal_wind>true</horizontal_wind>
+      <!-- true: the wing half in the stronger lift is pushed up (a rolling moment from the updraft
+           sampled along the span). The wing is read from the glider model. -->
+      <spanwise_lift>true</spanwise_lift>
+      <zi>1100</zi><wstar>2.1</wstar>
+    </plugin>
+  </world>
+</sdf>
